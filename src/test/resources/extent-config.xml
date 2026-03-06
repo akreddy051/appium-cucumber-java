@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<extentreports>
+    <configuration>
+        <theme>dark</theme>
+        <documentTitle>Appium Automation Report</documentTitle>
+        <reportName>Mobile Automation Execution</reportName>
+        <encoding>UTF-8</encoding>
+        <timelineEnabled>true</timelineEnabled>
+    </configuration>
+</extentreports>

@@ -5,13 +5,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.base.BaseTest;
+import org.example.driver.DriverManager;
 import org.example.pages.LoginPage;
 import org.example.pages.ProductsPage;
 
 public class LoginStepDef {
 
-    LoginPage loginPage = new LoginPage(BaseTest.driver);
-    ProductsPage productsPage = new ProductsPage(BaseTest.driver);
+    LoginPage loginPage = new LoginPage(DriverManager.getDriver());
+    ProductsPage productsPage = new ProductsPage(DriverManager.getDriver());
 
     @Given("the user is on the General Store login screen")
     public void theUserIsOnTheGeneralStoreLoginScreen() {

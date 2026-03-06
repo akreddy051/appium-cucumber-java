@@ -9,7 +9,8 @@ import io.cucumber.testng.CucumberOptions;
         glue = {"org.example.stepdefinitions"},
         plugin = {
                 "pretty",
-                "html:target/cucumber-report.html"
+                "html:target/cucumber-report.html",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         }
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
