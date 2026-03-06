@@ -1,13 +1,12 @@
-package org.example.stepdefinitions;
+package org.example.stepdefinitions.android;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.example.base.BaseTest;
 import org.example.driver.DriverManager;
-import org.example.pages.LoginPage;
-import org.example.pages.ProductsPage;
+import org.example.pages.android.LoginPage;
+import org.example.pages.android.ProductsPage;
 
 public class LoginStepDef {
 

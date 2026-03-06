@@ -1,4 +1,4 @@
-package org.example.pages;
+package org.example.pages.android;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
