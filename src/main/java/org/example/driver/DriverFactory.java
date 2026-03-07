@@ -10,8 +10,15 @@ import org.example.utils.Device;
 import org.example.utils.DeviceManager;
 
 import java.net.URL;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class DriverFactory {
+
+    // Base systemPort for UiAutomator2
+    private static final int BASE_SYSTEM_PORT = 8200;
+
+    // Atomic counter to assign ports to threads safely
+    private static final AtomicInteger portCounter = new AtomicInteger(0);
 
     public static AppiumDriver createDriver() {
 
@@ -37,8 +44,7 @@ public class DriverFactory {
     private static AppiumDriver createAndroidDriver(Device device) throws Exception {
         System.out.println(
                 "Thread: " + Thread.currentThread().getId() +
-                        " | Device: " + device.getDeviceName() +
-                        " | SystemPort: " + device.getSystemPort()
+                        " | Device: " + device.getDeviceName()
         );
 
         UiAutomator2Options options = new UiAutomator2Options();
@@ -46,9 +52,11 @@ public class DriverFactory {
         options.setPlatformName(device.getPlatformName());
         options.setDeviceName(device.getDeviceName());
         options.setAutomationName(device.getAutomationName());
-        options.setSystemPort(device.getSystemPort());
-        options.setAppPackage("com.androidsample.generalstore");
-        options.setAppActivity("com.androidsample.generalstore.MainActivity");
+        // Assign a unique systemPort for this thread
+        int systemPort = BASE_SYSTEM_PORT + portCounter.getAndIncrement();
+        options.setSystemPort(systemPort);
+        options.setAppPackage(ConfigReader.getProperty("appPackage"));
+        options.setAppActivity(ConfigReader.getProperty("appActivity"));
         options.setUdid(device.getUdid());
 
         String appPath = System.getProperty("user.dir") + "/" +

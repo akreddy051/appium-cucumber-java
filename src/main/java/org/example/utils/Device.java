@@ -5,7 +5,6 @@ public class Device {
     private String platformName;
     private String automationName;
     private String udid;
-    private int systemPort;
 
     public String getDeviceName() {
         return deviceName;
@@ -29,14 +28,6 @@ public class Device {
 
     public void setAutomationName(String automationName) {
         this.automationName = automationName;
-    }
-
-    public int getSystemPort() {
-        return systemPort;
-    }
-
-    public void setSystemPort(int systemPort) {
-        this.systemPort = systemPort;
     }
 
     public String getUdid() {
