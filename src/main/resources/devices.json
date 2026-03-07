@@ -1,0 +1,16 @@
+[
+  {
+    "deviceName": "MyPixel9",
+    "platformName": "Android",
+    "automationName": "UiAutomator2",
+    "udid": "emulator-5554",
+    "systemPort": "8200"
+  },
+  {
+    "deviceName": "motorola edge 60 pro",
+    "platformName": "Android",
+    "automationName": "UiAutomator2",
+    "udid": "ZA22388RZZ",
+    "systemPort": "8201"
+  }
+]

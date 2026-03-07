@@ -6,8 +6,8 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import org.example.utils.ConfigReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.example.utils.Device;
+import org.example.utils.DeviceManager;
 
 import java.net.URL;
 
@@ -15,15 +15,17 @@ public class DriverFactory {
 
     public static AppiumDriver createDriver() {
 
-        String platform = ConfigReader.getProperty("platformName");
-
         try {
+            Device device = DeviceManager.getDevice();
+            String platform = device.getPlatformName();
 
             if (platform.equalsIgnoreCase("Android")) {
-                return createAndroidDriver();
-            } else if (platform.equalsIgnoreCase("iOS")) {
-                return createIOSDriver();
-            } else {
+                return createAndroidDriver(device);
+            }
+            else if (platform.equalsIgnoreCase("iOS")) {
+                return createIOSDriver(device);
+            }
+            else {
                 throw new RuntimeException("Unsupported platform: " + platform);
             }
 
@@ -32,13 +34,22 @@ public class DriverFactory {
         }
     }
 
-    private static AppiumDriver createAndroidDriver() throws Exception {
+    private static AppiumDriver createAndroidDriver(Device device) throws Exception {
+        System.out.println(
+                "Thread: " + Thread.currentThread().getId() +
+                        " | Device: " + device.getDeviceName() +
+                        " | SystemPort: " + device.getSystemPort()
+        );
 
         UiAutomator2Options options = new UiAutomator2Options();
 
-        options.setPlatformName(ConfigReader.getProperty("platformName"));
-        options.setDeviceName(ConfigReader.getProperty("deviceName"));
-        options.setAutomationName(ConfigReader.getProperty("automationName"));
+        options.setPlatformName(device.getPlatformName());
+        options.setDeviceName(device.getDeviceName());
+        options.setAutomationName(device.getAutomationName());
+        options.setSystemPort(device.getSystemPort());
+        options.setAppPackage("com.androidsample.generalstore");
+        options.setAppActivity("com.androidsample.generalstore.MainActivity");
+        options.setUdid(device.getUdid());
 
         String appPath = System.getProperty("user.dir") + "/" +
                 ConfigReader.getProperty("appPath");
@@ -48,19 +59,17 @@ public class DriverFactory {
         URL appiumServer = new URL(
                 ConfigReader.getProperty("appiumServer")
         );
-        return new AndroidDriver(
-                appiumServer,
-                options
-        );
+
+        return new AndroidDriver(appiumServer, options);
     }
 
-    private static AppiumDriver createIOSDriver() throws Exception {
+    private static AppiumDriver createIOSDriver(Device device) throws Exception {
 
         XCUITestOptions options = new XCUITestOptions();
 
-        options.setPlatformName(ConfigReader.getProperty("platformName"));
-        options.setDeviceName(ConfigReader.getProperty("deviceName"));
-        options.setAutomationName(ConfigReader.getProperty("automationName"));
+        options.setPlatformName(device.getPlatformName());
+        options.setDeviceName(device.getDeviceName());
+        options.setAutomationName(device.getAutomationName());
 
         String appPath = System.getProperty("user.dir") + "/" +
                 ConfigReader.getProperty("appPath");
@@ -71,9 +80,6 @@ public class DriverFactory {
                 ConfigReader.getProperty("appiumServer")
         );
 
-        return new IOSDriver(
-                appiumServer,
-                options
-        );
+        return new IOSDriver(appiumServer, options);
     }
 }

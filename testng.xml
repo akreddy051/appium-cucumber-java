@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Appium Parallel Suite" parallel="tests" thread-count="3">
+
+    <test name="Mobile Tests">
+        <classes>
+            <class name="org.example.runners.TestRunner"/>
+        </classes>
+    </test>
+
+</suite>

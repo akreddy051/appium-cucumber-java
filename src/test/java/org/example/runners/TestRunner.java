@@ -2,10 +2,11 @@ package org.example.runners;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         tags = "",
-        features = "src/test/resources/features/android/login.feature",
+        features = "src/test/resources/features/android",
         glue = {"org.example.stepdefinitions","org.example.hooks"},
         plugin = {
                 "pretty",
@@ -14,5 +15,9 @@ import io.cucumber.testng.CucumberOptions;
         }
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
-
+        @Override
+        @DataProvider(parallel = true)
+        public Object[][] scenarios() {
+                return super.scenarios();
+        }
 }
