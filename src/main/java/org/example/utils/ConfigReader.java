@@ -11,7 +11,7 @@ public class ConfigReader {
         try {
             FileInputStream file = new FileInputStream(
                     System.getProperty("user.dir") +
-                            "/src/main/resources/application.properties"
+                            "/src/test/resources/execution.properties"
             );
             properties = new Properties();
             properties.load(file);
@@ -22,5 +22,9 @@ public class ConfigReader {
 
     public static String getProperty(String key) {
         return properties.getProperty(key);
+    }
+
+    public static String getAppPath() {
+        return properties.getProperty("app.path");
     }
 }

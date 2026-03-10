@@ -10,12 +10,13 @@ import org.example.utils.Device;
 import org.example.utils.DeviceManager;
 
 import java.net.URL;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class DriverFactory {
 
     // Base systemPort for UiAutomator2
-    private static final int BASE_SYSTEM_PORT = 8200;
+    private static final int BASE_SYSTEM_PORT = ThreadLocalRandom.current().nextInt(8200, 9000);
 
     // Atomic counter to assign ports to threads safely
     private static final AtomicInteger portCounter = new AtomicInteger(0);
@@ -26,14 +27,13 @@ public class DriverFactory {
             Device device = DeviceManager.getDevice();
             String platform = device.getPlatformName();
 
-            if (platform.equalsIgnoreCase("Android")) {
-                return createAndroidDriver(device);
-            }
-            else if (platform.equalsIgnoreCase("iOS")) {
-                return createIOSDriver(device);
-            }
-            else {
-                throw new RuntimeException("Unsupported platform: " + platform);
+            switch (ConfigReader.getProperty("platform.name")) {
+                case "android" :
+                    return createAndroidDriver(device);
+                case "ios":
+                    return createIOSDriver(device);
+                default:
+                    throw new RuntimeException("Unsupported platform: " + platform);
             }
 
         } catch (Exception e) {
@@ -55,17 +55,17 @@ public class DriverFactory {
         // Assign a unique systemPort for this thread
         int systemPort = BASE_SYSTEM_PORT + portCounter.getAndIncrement();
         options.setSystemPort(systemPort);
-        options.setAppPackage(ConfigReader.getProperty("appPackage"));
-        options.setAppActivity(ConfigReader.getProperty("appActivity"));
+        options.setAppPackage(ConfigReader.getProperty("app.package"));
+        options.setAppActivity(ConfigReader.getProperty("app.activity"));
         options.setUdid(device.getUdid());
 
         String appPath = System.getProperty("user.dir") + "/" +
-                ConfigReader.getProperty("appPath");
+                ConfigReader.getAppPath();
 
         options.setApp(appPath);
 
         URL appiumServer = new URL(
-                ConfigReader.getProperty("appiumServer")
+                ConfigReader.getProperty("appium.server.url")
         );
 
         return new AndroidDriver(appiumServer, options);
@@ -80,7 +80,7 @@ public class DriverFactory {
         options.setAutomationName(device.getAutomationName());
 
         String appPath = System.getProperty("user.dir") + "/" +
-                ConfigReader.getProperty("appPath");
+                ConfigReader.getAppPath();
 
         options.setApp(appPath);
 

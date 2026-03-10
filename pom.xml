@@ -84,6 +84,9 @@
        <version>3.2.5</version>
 
        <configuration>
+         <suiteXmlFiles>
+           <suiteXmlFile>testng.xml</suiteXmlFile>
+         </suiteXmlFiles>
          <properties>
            <property>
              <name>dataproviderthreadcount</name>

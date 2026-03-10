@@ -5,17 +5,16 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.example.base.BaseTest;
 import org.example.driver.DriverManager;
+import org.example.utils.DeviceManager;
 import org.example.utils.ScreenshotUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.net.MalformedURLException;
 
 public class Hooks {
     private static final Logger log = LoggerFactory.getLogger(BaseTest.class);
 
     @Before
-    public void before(Scenario scenario) throws MalformedURLException {
+    public void before(Scenario scenario) {
         BaseTest.initializeAppiumDriver();
         scenario.log("Executing on device: " + DriverManager.getDriver().getCapabilities().getCapability("deviceName"));
         log.info("Test Started");
@@ -31,6 +30,7 @@ public class Hooks {
         }
         log.info("Test Ended");
         BaseTest.quitDriver();
+        DeviceManager.releaseDevice();
         log.info("Driver quit successfully");
     }
 }
