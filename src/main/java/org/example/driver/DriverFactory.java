@@ -55,8 +55,8 @@ public class DriverFactory {
         // Assign a unique systemPort for this thread
         int systemPort = BASE_SYSTEM_PORT + portCounter.getAndIncrement();
         options.setSystemPort(systemPort);
-        options.setAppPackage(ConfigReader.getProperty("app.package"));
-        options.setAppActivity(ConfigReader.getProperty("app.activity"));
+//        options.setAppPackage(ConfigReader.getProperty("app.package"));
+//        options.setAppActivity(ConfigReader.getProperty("app.activity"));
         options.setUdid(device.getUdid());
 
         String appPath = System.getProperty("user.dir") + "/" +

@@ -1,0 +1,27 @@
+userName: akshayreddysinga_P8yp7M
+accessKey: hNk8KcA2NPs6tHkTqaqF
+framework: cucumber-testng
+app: bs://1661ffe12fa2b34b151b9d655fa940af0f46583a
+platforms:
+  - platformName: android
+    deviceName: Samsung Galaxy S22 Ultra
+    platformVersion: 12.0
+#  - platformName: android
+#    deviceName: Google Pixel 8 Pro
+#    platformVersion: 14.0
+#  - platformName: android
+#    deviceName: OnePlus 11R
+#    platformVersion: 13.0
+parallelsPerPlatform: 1
+buildName: bstack-parallel-demo
+buildIdentifier: ${BUILD_NUMBER}
+projectName: BrowserStack Sample
+browserstackLocal: false
+# Test Observability is an intelligent test reporting & debugging product. It collects data using the SDK. Read more about what data is collected at https://www.browserstack.com/docs/test-observability/references/terms-and-conditions
+# Visit observability.browserstack.com to see your test reports and insights. To disable test observability, specify `testObservability: false` in the key below.
+testObservability: true
+debug: true
+networkLogs: true
+percy: false
+percyCaptureMode: auto
+accessibility: false
