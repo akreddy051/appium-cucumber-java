@@ -8,7 +8,6 @@ import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         tags = "",
-        features = "src/test/resources/features/android",
         glue = {"org.example.stepdefinitions", "org.example.hooks"},
         plugin = {
                 "pretty",
@@ -23,11 +22,13 @@ public class TestRunner extends AbstractTestNGCucumberTests {
         String tags = ConfigReader.getProperty("execution.tags");
         String parallel = ConfigReader.getProperty("execution.parallel");
         String threads = ConfigReader.getProperty("execution.threadCount");
-
+        String features = ConfigReader.getProperty("execution.features");
         if (tags != null && !tags.isEmpty()) {
             System.setProperty("cucumber.filter.tags", tags);
         }
-
+        if (features != null && !features.isEmpty()) {
+            System.setProperty("cucumber.features", features);
+        }
         if ("true".equalsIgnoreCase(parallel)) {
             System.setProperty("dataproviderthreadcount", threads);
             System.out.println("Running in PARALLEL with " + threads + " threads");
