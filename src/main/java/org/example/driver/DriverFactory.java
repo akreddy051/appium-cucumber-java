@@ -6,74 +6,92 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import org.example.utils.ConfigReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
 public class DriverFactory {
 
     public static AppiumDriver createDriver() {
-
+        String executionType = ConfigReader.getProperty("executionType");
         String platform = ConfigReader.getProperty("platformName");
-
         try {
-
-            if (platform.equalsIgnoreCase("Android")) {
-                return createAndroidDriver();
-            } else if (platform.equalsIgnoreCase("iOS")) {
-                return createIOSDriver();
-            } else {
-                throw new RuntimeException("Unsupported platform: " + platform);
+            if (executionType.equalsIgnoreCase("local")) {
+                if (platform.equalsIgnoreCase("Android")) {
+                    return createLocalAndroidDriver();
+                }
+                else if (platform.equalsIgnoreCase("iOS")) {
+                    return createLocalIOSDriver();
+                }
             }
-
+            else if (executionType.equalsIgnoreCase("cloud")) {
+                if (platform.equalsIgnoreCase("Android")) {
+                    return createCloudAndroidDriver();
+                }
+                else if (platform.equalsIgnoreCase("iOS")) {
+                    return createCloudIOSDriver();
+                }
+            }
+            throw new RuntimeException(
+                    "Unsupported combination: " + executionType + " + " + platform
+            );
         } catch (Exception e) {
             throw new RuntimeException("Driver creation failed", e);
         }
     }
 
-    private static AppiumDriver createAndroidDriver() throws Exception {
-
+    /* ---------------- LOCAL DRIVERS ---------------- */
+    private static AppiumDriver createLocalAndroidDriver() throws Exception {
         UiAutomator2Options options = new UiAutomator2Options();
-
         options.setPlatformName(ConfigReader.getProperty("platformName"));
         options.setDeviceName(ConfigReader.getProperty("deviceName"));
         options.setAutomationName(ConfigReader.getProperty("automationName"));
-
         String appPath = System.getProperty("user.dir") + "/" +
                 ConfigReader.getProperty("appPath");
-
         options.setApp(appPath);
-
-        URL appiumServer = new URL(
-                ConfigReader.getProperty("appiumServer")
-        );
-        return new AndroidDriver(
-                appiumServer,
-                options
-        );
+        URL appiumServer = new URL(ConfigReader.getProperty("appiumServer"));
+        return new AndroidDriver(appiumServer, options);
     }
 
-    private static AppiumDriver createIOSDriver() throws Exception {
-
+    private static AppiumDriver createLocalIOSDriver() throws Exception {
         XCUITestOptions options = new XCUITestOptions();
-
         options.setPlatformName(ConfigReader.getProperty("platformName"));
         options.setDeviceName(ConfigReader.getProperty("deviceName"));
         options.setAutomationName(ConfigReader.getProperty("automationName"));
-
         String appPath = System.getProperty("user.dir") + "/" +
                 ConfigReader.getProperty("appPath");
-
         options.setApp(appPath);
+        URL appiumServer = new URL(ConfigReader.getProperty("appiumServer"));
+        return new IOSDriver(appiumServer, options);
+    }
 
-        URL appiumServer = new URL(
-                ConfigReader.getProperty("appiumServer")
-        );
+    /* ---------------- CLOUD DRIVERS ---------------- */
+    private static AppiumDriver createCloudAndroidDriver() throws Exception {
+        String userName = System.getenv("LT_USERNAME");
+        String accessKey = System.getenv("LT_ACCESS_KEY");
+        UiAutomator2Options options = new UiAutomator2Options();
+        options.setPlatformName("Android");
+        options.setDeviceName(ConfigReader.getProperty("cloud.deviceName"));
+        options.setPlatformVersion(ConfigReader.getProperty("cloud.platformVersion"));
+        options.setCapability("build", "Native App automate Demo");
+        options.setCapability("isRealMobile", false);
+        options.setCapability("app",ConfigReader.getProperty("cloud.appId"));     //Enter the app url here
+        options.setCapability("network", false);
+        options.setCapability("video", true);
+        options.setCapability("console", true);
+        options.setCapability("visual", true);
+        String gridURL = "https://" + userName + ":" + accessKey + "@mobile-hub.lambdatest.com/wd/hub";
+        System.out.println("gridURL: "+gridURL);
+        URL cloudUrl = new URL(gridURL);
+        return new AndroidDriver(cloudUrl, options);
+    }
 
-        return new IOSDriver(
-                appiumServer,
-                options
-        );
+    private static AppiumDriver createCloudIOSDriver() throws Exception {
+        XCUITestOptions options = new XCUITestOptions();
+        options.setPlatformName("iOS");
+        options.setDeviceName(ConfigReader.getProperty("cloud.deviceName"));
+        options.setPlatformVersion(ConfigReader.getProperty("cloud.platformVersion"));
+        options.setCapability("appium:app", ConfigReader.getProperty("cloud.appId"));
+        URL cloudUrl = new URL(ConfigReader.getProperty("cloud.url"));
+        return new IOSDriver(cloudUrl, options);
     }
 }
