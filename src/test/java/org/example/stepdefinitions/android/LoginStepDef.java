@@ -18,6 +18,11 @@ public class LoginStepDef {
         loginPage.verifyUserOnLoginScreen();
     }
 
+    @When("user enters passcode on BHIM App")
+    public void userEntersPasscodeOnBHIMApp() {
+        loginPage.enterPasscodeOnBHIM("2580");
+    }
+
     @When("the user selects {string} from the country dropdown")
     public void theUserSelectsFromTheCountryDropdown(String country) {
         loginPage.selectCountry(country);

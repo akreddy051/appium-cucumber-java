@@ -3,6 +3,7 @@ Feature: Login functionality verification
   @SuccessLogin @Positive
   Scenario: User successfully enters all details and starts shopping
     Given the user is on the General Store login screen
+    When user enters passcode on BHIM App
     When the user selects "Afghanistan" from the country dropdown
     And the user enters "John Doe" in the name field
     And the user selects the "Male" gender option

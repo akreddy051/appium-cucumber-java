@@ -1,7 +1,7 @@
-userName: akshayreddysinga_P8yp7M
-accessKey: hNk8KcA2NPs6tHkTqaqF
+userName: singadiwarakshay_CH02GP
+accessKey: PbEsTRAswjzvqi44P8c7
 framework: cucumber-testng
-app: bs://1661ffe12fa2b34b151b9d655fa940af0f46583a
+app: bs://641d6ddaf9776aef9b753f0e027d9d8556a9fe90
 platforms:
   - platformName: android
     deviceName: Samsung Galaxy S22 Ultra
@@ -12,7 +12,7 @@ platforms:
 #  - platformName: android
 #    deviceName: OnePlus 11R
 #    platformVersion: 13.0
-parallelsPerPlatform: 1
+parallelsPerPlatform: 2
 buildName: bstack-parallel-demo
 buildIdentifier: ${BUILD_NUMBER}
 projectName: BrowserStack Sample
@@ -23,3 +23,4 @@ networkLogs: true
 percy: false
 percyCaptureMode: auto
 accessibility: false
+appProfiling: true
