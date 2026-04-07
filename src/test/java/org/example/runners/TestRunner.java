@@ -4,7 +4,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-        tags = "",
+        tags = "@SuccessLogin",
         features = "src/test/resources/features/android/login.feature",
         glue = {"org.example.stepdefinitions","org.example.hooks"},
         plugin = {

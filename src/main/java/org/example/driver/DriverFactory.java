@@ -72,14 +72,21 @@ public class DriverFactory {
         options.setPlatformName("android");
         options.setDeviceName(ConfigReader.getProperty("cloud.deviceName"));
         options.setPlatformVersion(ConfigReader.getProperty("cloud.platformVersion"));
+        options.setAppPackage(ConfigReader.getProperty("appPackage"));
+        options.setAppActivity(ConfigReader.getProperty("appActivity"));
         options.setCapability("build", "Native App-6 automate Demo");
         options.setCapability("isRealMobile", true);
         options.setCapability("app",ConfigReader.getProperty("cloud.appId"));     //Enter the app url here
-        options.setCapability("network", false);
+        options.setCapability("network", ConfigReader.getProperty("cloud.network"));
+//        options.setCapability("mitmProxy", false);
         options.setCapability("video", true);
         options.setCapability("console", true);
         options.setCapability("visual", true);
         options.setCapability("privateCloud",true);
+        options.setCapability("devicelog",true);
+        options.setCapability("appProfiling",true);
+//        options.setCapability("noReset", true);
+//        options.setCapability("fullReset", false);
         String gridURL = "https://" + userName + ":" + accessKey + "@mobile-hub.lambdatest.com/wd/hub";
         System.out.println("gridURL: "+gridURL);
         URL cloudUrl = new URL(gridURL);

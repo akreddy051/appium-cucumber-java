@@ -1,13 +1,16 @@
 package org.example.stepdefinitions.android;
 
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lombok.extern.slf4j.Slf4j;
 import org.example.driver.DriverManager;
 import org.example.pages.android.LoginPage;
 import org.example.pages.android.ProductsPage;
 
+@Slf4j
 public class LoginStepDef {
 
     LoginPage loginPage = new LoginPage(DriverManager.getDriver());
@@ -51,5 +54,10 @@ public class LoginStepDef {
     @And("the user should remain on the login screen")
     public void theUserShouldRemainOnTheLoginScreen() {
         loginPage.verifyUserOnLoginScreen();
+    }
+
+    @When("user enters passcode on BHIM App")
+    public void userEntersPasscodeOnBHIMApp() {
+        loginPage.enterPasscodeOnBHIM("2580");
     }
 }
