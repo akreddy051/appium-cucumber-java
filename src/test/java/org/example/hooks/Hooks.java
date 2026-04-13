@@ -19,6 +19,8 @@ public class Hooks {
     @Before
     public void before(Scenario scenario) {
         BaseTest.initializeAppiumDriver();
+        // To start a test case
+//        DriverManager.getDriver().executeScript("lambda-testCase-start="+scenario.getName());
         scenario.log("Executing on device: " + DriverManager.getDriver().getCapabilities().getCapability("deviceName"));
         log.info("Test Started");
     }
@@ -33,6 +35,7 @@ public class Hooks {
             DriverManager.getDriver().executeScript("lambda-hook: {\"action\": \"setTestStatus\",\"arguments\": {\"status\":\"passed\"}} ");
         }
         log.info("Test Ended");
+//        DriverManager.getDriver().executeScript("lambda-testCase-end="+scenario.getName());
         BaseTest.quitDriver();
         log.info("Driver quit successfully");
     }
