@@ -71,31 +71,31 @@ public class LoginPage {
     }
 
     //Validations
-//    public void verifyUserOnLoginScreen() {
-//        boolean isCountryDropdownVisible = dropDownBtn.isDisplayed();
-//        Assert.assertTrue(isCountryDropdownVisible);
-//    }
-
     public void verifyUserOnLoginScreen() {
-        System.out.println("sessionId : " +driver.getSessionId());
-//        Map<String,Object> args = new HashMap<>();
-//        args.put("package","in.org.npci.upi");
-//        args.put("intent","in.org.npci.upi/in.org.npci.upiapp.HomeActivity");
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-
-        skip.click();
-        skip.click();
-        skip.click();
-        boolean isKeyBoardDisplayed = passcodeKeyboard.isDisplayed();
-        Assert.assertTrue(isKeyBoardDisplayed);
+        boolean isCountryDropdownVisible = dropDownBtn.isDisplayed();
+        Assert.assertTrue(isCountryDropdownVisible);
     }
+
+//    public void verifyUserOnLoginScreen() {
+//        System.out.println("sessionId : " +driver.getSessionId());
+////        Map<String,Object> args = new HashMap<>();
+////        args.put("package","in.org.npci.upi");
+////        args.put("intent","in.org.npci.upi/in.org.npci.upiapp.HomeActivity");
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+//
+//        skip.click();
+//        skip.click();
+//        skip.click();
+//        boolean isKeyBoardDisplayed = passcodeKeyboard.isDisplayed();
+//        Assert.assertTrue(isKeyBoardDisplayed);
+//    }
 
     public void validateUserNameErrorToast(String message) {
         String actualErrorMessage = toastMessage.getText();

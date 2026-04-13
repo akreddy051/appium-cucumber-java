@@ -72,13 +72,13 @@ public class DriverFactory {
         options.setPlatformName("android");
         options.setDeviceName(ConfigReader.getProperty("cloud.deviceName"));
         options.setPlatformVersion(ConfigReader.getProperty("cloud.platformVersion"));
-        options.setAppPackage(ConfigReader.getProperty("appPackage"));
-        options.setAppActivity(ConfigReader.getProperty("appActivity"));
-        options.setCapability("build", "Native App-6 automate Demo");
+//        options.setAppPackage(ConfigReader.getProperty("appPackage"));
+//        options.setAppActivity(ConfigReader.getProperty("appActivity"));
+        options.setCapability("build", "Native App-7 automate Demo");
         options.setCapability("isRealMobile", true);
         options.setCapability("app",ConfigReader.getProperty("cloud.appId"));     //Enter the app url here
         options.setCapability("network", ConfigReader.getProperty("cloud.network"));
-//        options.setCapability("mitmProxy", false);
+//        options.setCapability("mitmProxy", true);
         options.setCapability("video", true);
         options.setCapability("console", true);
         options.setCapability("visual", true);
@@ -90,7 +90,9 @@ public class DriverFactory {
         String gridURL = "https://" + userName + ":" + accessKey + "@mobile-hub.lambdatest.com/wd/hub";
         System.out.println("gridURL: "+gridURL);
         URL cloudUrl = new URL(gridURL);
-        return new AndroidDriver(cloudUrl, options);
+        AndroidDriver driver = new AndroidDriver(cloudUrl, options);
+//        driver.activateApp(ConfigReader.getProperty("appPackage"));
+        return driver;
     }
 
     private static AppiumDriver createCloudIOSDriver() throws Exception {
