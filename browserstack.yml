@@ -2,20 +2,20 @@ userName: singadiwarakshay_CH02GP
 accessKey: PbEsTRAswjzvqi44P8c7
 framework: cucumber-testng
 #BHIM App
-#app: bs://641d6ddaf9776aef9b753f0e027d9d8556a9fe90
+app: bs://2643c4e2aa0cd854bb3adcb2800c4b5076ff97a6
 #GeneralStoreApp
-app: bs://3c3925f4f641b5dd0bf75a91b820d77da689ceb7
+#app: bs://3c3925f4f641b5dd0bf75a91b820d77da689ceb7
 platforms:
-  - platformName: android
-    deviceName: Samsung Galaxy S23  Ultra
-    platformVersion: 13.0
-    dedicatedDevice: true
-    deviceId: "RZCWA26P7FT"
 #  - platformName: android
-#    deviceName: Oppo A78
+#    deviceName: Samsung Galaxy S23  Ultra
 #    platformVersion: 13.0
 #    dedicatedDevice: true
-#    deviceId: "6T8DPBN7AQZP7HAU"
+#    deviceId: "RZCWA26P7FT"
+  - platformName: android
+    deviceName: Oppo A78
+    platformVersion: 13.0
+    dedicatedDevice: true
+    deviceId: "6T8DPBN7AQZP7HAU"
 #  - platformName: android
 #    deviceName: OnePlus 11R
 #    platformVersion: 13.0
