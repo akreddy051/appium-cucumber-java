@@ -71,35 +71,35 @@ public class LoginPage {
     }
 
     //Validations
-//    public void verifyUserOnLoginScreen() {
-//        boolean isCountryDropdownVisible = dropDownBtn.isDisplayed();
-//        Assert.assertTrue(isCountryDropdownVisible);
-//    }
     public void verifyUserOnLoginScreen() {
-//        boolean isCountryDropdownVisible = dropDownBtn.isDisplayed();
-//        Assert.assertTrue(isCountryDropdownVisible);
-//        System.out.println("sessionId : " +driver.getSessionId());
-//        Map<String,Object> args = new HashMap<>();
-//        args.put("package","in.org.npci.upi");
-//        args.put("intent","in.org.npci.upi/in.org.npci.upiapp.HomeActivity");
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-//        driver.executeScript("mobile: startActivity",args);
-        // wait until element is clickable
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        for(int i=1;i<=4;i++){
-            if(skip.isDisplayed()){
-                skip.click();
-            }
-        }
-        boolean isKeyBoardDisplayed = passcodeKeyboard.isDisplayed();
-        Assert.assertTrue(isKeyBoardDisplayed);
+        boolean isCountryDropdownVisible = dropDownBtn.isDisplayed();
+        Assert.assertTrue(isCountryDropdownVisible);
     }
+//    public void verifyUserOnLoginScreen() {
+////        boolean isCountryDropdownVisible = dropDownBtn.isDisplayed();
+////        Assert.assertTrue(isCountryDropdownVisible);
+////        System.out.println("sessionId : " +driver.getSessionId());
+////        Map<String,Object> args = new HashMap<>();
+////        args.put("package","in.org.npci.upi");
+////        args.put("intent","in.org.npci.upi/in.org.npci.upiapp.HomeActivity");
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+////        driver.executeScript("mobile: startActivity",args);
+//        // wait until element is clickable
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+//        for(int i=1;i<=4;i++){
+//            if(skip.isDisplayed()){
+//                skip.click();
+//            }
+//        }
+//        boolean isKeyBoardDisplayed = passcodeKeyboard.isDisplayed();
+//        Assert.assertTrue(isKeyBoardDisplayed);
+//    }
 
     public void validateUserNameErrorToast(String message) {
         String actualErrorMessage = toastMessage.getText();
